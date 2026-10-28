@@ -44,9 +44,18 @@ add_library(data_structures STATIC
     src/data_structures/ListDataStructure.cpp
     src/data_structures/MapDataStructure.cpp
     src/data_structures/UnorderedMapDataStructure.cpp
+    src/data_structures/DataStructureFactory.cpp
 )
 target_include_directories(data_structures PUBLIC ${PROJECT_SOURCE_DIR}/include)
 target_compile_options(data_structures PRIVATE -Wall -Wextra -Wpedantic)
+
+add_library(benchmark_core STATIC
+    src/benchmark_core/BenchmarkConfig.cpp
+    src/benchmark_core/DataInitializer.cpp
+)
+target_include_directories(benchmark_core PUBLIC ${PROJECT_SOURCE_DIR}/include)
+target_link_libraries(benchmark_core PUBLIC data_structures)
+target_compile_options(benchmark_core PRIVATE -Wall -Wextra -Wpedantic)
 
 if(PROJECT_BUILD_TESTS)
     enable_testing()
